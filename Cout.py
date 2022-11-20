@@ -14,7 +14,7 @@ print("""
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>變更商品購買數量</title>
+<title>結帳</title>
 <style>
     body{
         margin: 30px auto;

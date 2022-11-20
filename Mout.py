@@ -14,7 +14,7 @@ print("""
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>變更商品購買數量</title>
+<title>出貨列表</title>
 <style>
     body{
         margin: 30px auto;
@@ -29,7 +29,7 @@ print("""
     fieldset{
         margin: 30px auto;
         background-color: white;
-        width: 400px;
+        width: 600px;
         border: solid #8f8681 5px;
     }
     div{text-align:center;}
@@ -63,24 +63,30 @@ print("""
 </head>
 <body>
 <fieldset>
-<legend>確認要出貨了嗎?</legend>
-<form method="post" action="Cpay.py">
+<legend>全部出貨</legend>
+<form method="post" action="Mpay.py">
+確認要出貨了嗎?
 一旦送出，將無法反悔
 <input class="button" type="submit" value="確定">
+<input class="button" type="button" value="回上一頁" onclick="location.href='MListItem.py'">
+</form>
+</fieldset>
+<fieldset>
+<legend>個別出貨</legend>
+<form method="post" action="MeachOut.py">
+輸入要出貨的商品號碼: <input type='text' name='i'>
+<input class="button" type="submit" value="提交">
 </form>
 </fieldset>
 <div id="list">
 <h2>出貨列表</h2><hr/>
 """)
-clList=ml.getCart()
-for (id,name,price,inventory,pnum) in clList:
-	print(f"<p>商品編號{id}: 商品名稱:{name} 單價:{price} 庫存量:{inventory} 購買數量:{pnum} </p>")
+outList=ml.getPayList()
+for (id,name,pay) in outList:
+	print(f"<p>商品編號{id}: 商品名稱:{name} 待出貨量:{pay}</p>")
 print("""
 </div>
-<div>
-<input class="button" type="button" value="回商品清單" onclick="location.href='CListItem.py'">
-<input class="button" type="button" value="回購物車" onclick="location.href='CgetCartItems.py'"></div>
-</div>
+
 </body></html>
 """)
 

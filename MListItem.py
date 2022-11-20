@@ -132,12 +132,8 @@ print("""
 
 <fieldset id="out">
 <legend>出貨</legend>
-<form method="post" action="MeachOut.py">
-輸入要出貨的商品號碼: <input type='text' name='i'>
-<input class="button" type="submit" value="提交">
-</form>
-<form method="post" action="Mpay.py">
-<input class="button" type="submit" value="全部出貨">
+<form method="post" action="Mout.py">
+<input class="button" type="submit" value="查看出貨列表">
 </form>
 </fieldset>
 </div>
@@ -154,15 +150,11 @@ for (id,name,price,inventory) in mlList:
 print("""
 <input class="button" type="button" value="點我回首頁" onclick="location.href='home.html'">
 </div>
-<div id="back">
-<h1>出貨列表</h1><hr/>
+</body></html>
 """)
+
 outList=ml.getPayList()
 for (id,name,pay) in outlList:
 	print(f"<p>商品編號{id}: 商品名稱:{name} 待出貨量:{pay}</p>")
-print("""
-</div>
-</body></html>
-""")
 
 
