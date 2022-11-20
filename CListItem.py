@@ -1,7 +1,6 @@
 #!C:\Users\julia\AppData\Local\Programs\Python\Python310\python.exe
 #-*- coding: utf-8 -*-
 #處理stdio輸出編碼，以避免亂碼
-
 # 如果是要輸出中文，記得重新 encode
 #ctypes.windll.user32.MessageBoxA(0, "內容".decode("utf-8").encode("big5"), "標題".decode("utf-8").encode("big5"), 1)
 
@@ -85,8 +84,17 @@ print("""
 #只要定義好函數(變成物件)
 clList=ml.getList()#呼叫ml.py裡的function:getList
 
-
 for (id,name,price,inventory) in clList:
+	print(f"<p>商品編號{id}: 商品名稱:{name} 單價:{price} 庫存量:{inventory}</p>")
+    
+print("""
+</div>
+<div>
+<h1>依價格排序前三名</h1><hr/>
+""")
+#這個式助教叫我改的部分!
+threeList=ml.three()
+for (id,name,price,inventory) in threeList:
 	print(f"<p>商品編號{id}: 商品名稱:{name} 單價:{price} 庫存量:{inventory}</p>")
     
 print("""

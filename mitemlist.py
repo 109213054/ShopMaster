@@ -1,14 +1,75 @@
 #連線DB
 from dbConfig import conn, cur
 
-
+    #前三名
+def three():
+    sql="select id, name, price, inventory from mitemlist order by price desc limit 3;"
+    cur.execute(sql)
+    records = cur.fetchall()
+    return records
     
-    #管理端商品清單
+    #商品清單
 def getList():
     sql="select id, name, price, inventory from mitemlist;"
     cur.execute(sql)
     records = cur.fetchall()
     return records
+    
+    #檢查有無此商品
+def chkItem(id):
+    chknum=0
+    sql="select id from mitemlist;"
+    cur.execute(sql)
+    records = cur.fetchall()
+#    re = cursor.fetchone()
+    for i in records:
+        if int(id)!=int(i[0]):#如果陣列中的數字與id不一樣，則chknum不動，表不存在
+            chknum=chknum+0
+        else: 
+            chknum = chknum+1#若相同則加一
+    return chknum #存在為1 不存在為0
+    
+    #加入購買數量
+def Caddnum(id,num):
+    sql="update mitemlist set `pnum`=pnum+%s where id=%s;"
+    cur.execute(sql,(num,id))
+    conn.commit()
+    return True
+    
+    #購物清單
+def getCart():
+    #查詢
+    sql="select id, name, price, inventory, pnum from mitemlist where pnum>0;"#需大於0 才代表有加入購物車
+    cur.execute(sql)
+    records = cur.fetchall()
+    return records
+    
+    #變更購買數量購物車
+def Cedit(id,num):
+    sql="update mitemlist set `pnum`=%s where id=%s;"
+    cur.execute(sql,(num,id))
+    conn.commit()
+    return True
+    
+    #檢查購物車有無此商品
+def chkCart(id):
+    chknum=0
+    sql="select id from mitemlist where pnum>0;"
+    cur.execute(sql)
+    records = cur.fetchall()
+    for i in records:
+        if int(id)!=int(i[0]):#如果陣列中的數字與id不一樣，則chknum不動，表不存在
+            chknum=chknum+0
+        else: 
+            chknum = chknum+1#若相同則加一
+    return chknum #存在為1 不存在為0
+    
+    #刪除購物車中商品
+def CdelItem(id):
+    sql="update mitemlist set `pnum`=0 where id=%s;"
+    cur.execute(sql,(id,))
+    conn.commit()
+    return True
     
     #出貨列表
 def getPayList():
@@ -17,12 +78,6 @@ def getPayList():
     records = cur.fetchall()
     return records
     
-    #管理端顯示的
-def ManaList():
-    sql="select id, name, price, inventory, pay from mitemlist;"
-    cur.execute(sql)
-    records = cur.fetchall()
-    return records
     
     #新增商品
 def MaddItem(name,price,inventory):
@@ -54,20 +109,6 @@ def MdelItem(id):
     conn.commit()
     return True
     
-    #檢查有無此商品
-def chkItem(id):
-    chknum=0
-    sql="select id from mitemlist;"
-    cur.execute(sql)
-    records = cur.fetchall()
-#    re = cursor.fetchone()
-    for i in records:
-        if int(id)!=int(i[0]):#如果陣列中的數字與id不一樣，則chknum不動，表不存在
-            chknum=chknum+0
-        else: 
-            chknum = chknum+1#若相同則加一
-    return chknum #存在為1 不存在為0
-    
     
     #更新庫存
 def MaddInv(id,num):
@@ -95,48 +136,6 @@ def chkpnum(id,num):
     for i in records:
         chknum=int(i[0])
     return chknum
-
-    #加入購買數量
-def Caddnum(id,num):
-    sql="update mitemlist set `pnum`=pnum+%s where id=%s;"
-    cur.execute(sql,(num,id))
-    conn.commit()
-    return True
-    
-    #購物清單
-def getCart():
-    #查詢
-    sql="select id, name, price, inventory, pnum from mitemlist where pnum>0;"#需大於0 才代表有加入購物車
-    cur.execute(sql)
-    records = cur.fetchall()
-    return records
-    
-    #變更購買數量購物車
-def Cedit(id,num):
-    sql="update mitemlist set `pnum`=%s where id=%s;"
-    cur.execute(sql,(num,id))
-    conn.commit()
-    return True
-    
-    #刪除購物車中商品
-def CdelItem(id):
-    sql="update mitemlist set `pnum`=0 where id=%s;"
-    cur.execute(sql,(id,))
-    conn.commit()
-    return True
-
-    #檢查購物車有無此商品
-def chkCart(id):
-    chknum=0
-    sql="select id from mitemlist where pnum>0;"
-    cur.execute(sql)
-    records = cur.fetchall()
-    for i in records:
-        if int(id)!=int(i[0]):#如果陣列中的數字與id不一樣，則chknum不動，表不存在
-            chknum=chknum+0
-        else: 
-            chknum = chknum+1#若相同則加一
-    return chknum #存在為1 不存在為0
     
     #結帳囉
 def Cout():
