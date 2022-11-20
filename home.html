@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>管理者介面</title>
+<style>
+    h1{text-align:center;}
+    fieldset{
+        margin: 30px auto;
+        background-color: white;
+        width: 300px;
+        border: solid #8f8681 5px;
+    }
+    .button {
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 10px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 12px;
+    }
+     
+    .button:hover {
+        background-color: #8f8681; /*藍色*/
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 10px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 12px;
+    }
+</style>
+</head>
+<body>
+
+<fieldset>
+<legend>登入</legend>
+<input class="button" type="button" value="我是管理者" onclick="location.href='MListItem.py'">
+</fieldset>
+<fieldset>
+<legend>登入</legend>
+<input class="button" type="button" value="我是消費者" onclick="location.href='CListItem.py'">
+</fieldset>
+</body>
+</html>
